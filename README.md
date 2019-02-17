@@ -1,4 +1,4 @@
-# Monorepo Config Settings
+# Monorepo Config Settings (**DRAFT**)
 ## Project Structure (Monorepo Root)
     Directories
         ../packages --> monorepo root.  Child projects located in ./packages subfolder.
