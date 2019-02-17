@@ -1,44 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Monorepo Config Settings
+## Project Structure (Monorepo Root)
+    Directories
+        ../packages --> monorepo root.  Child projects located in ./packages subfolder.
+        ./packages/common -> Library of code common to both react-web and react-native build targets
+        ./packages/app  -> react native build project
+        ./packages/web -> react web build project folder
 
-## Available Scripts
+    Files
+        ../packages/package.json  -> where yarn workspaces are configured.
+            “private”:”true”  -> needed, don't know why
+            “name”:”my-monorepo"  CONFIRM: shouldn't this be called @wow?
+            “main”: “index.js" -> CONFIRM: don't think this is needed
+            “workspaces”: [“packages/*”]  —> register child projects with yarn's workspace manager
 
-In the project directory, you can run:
+        ../packages/tsconfig.json  -> CONFIRM: this file not neeeded, no building happening here.
 
-### `npm start`
+### Project Structure (Common)
+    Directories:
+        ./packages/common -> Library of code common to both react-web and react-native build targets
+        ./packages/common/dist  -> output location from typescript compiler (see "tsconfig.outdir").
+        ./packages/common/src  -> input source for typescript compiler (see "tsconfig.include").
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    ./packages/common/package.json
+        “name”:”@wow/common”  —> @wow is monorepo name, “common” is dependency name
+        “main”:”dist/index.js” —> note dist must be specified, else import “@wow/common” won’t be found
+        “build” : “rimraf dist && tsc”  —> to delete dist/ then recompile typescript
+        “devDependency”:”rimraf”:”1.0.0"
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+    ./packages/common/tsconfig.json
+        "include":["src"]  -> specifies input source for typescript compiler
+        "outdir":"dist" -> specifies output folder location for typescript compiler
+        "modules":"commonjs"
+        "declaration":"true"  -> to generate .d.ts file in typescript output
+        “jsx”:”react"
+        no “isolated modules” --> we want the d.ts declarations generated
+        no “allowjs”, --> this is typescript project
+        no  “noemit” --> (we don’t not want the code emitted… IOW, we want it emitted)
+### Project Structure (App)
+    ./packages/app/package.json
+        “name”:”@wow/app"
+        “dependencies”: {“@wow/common”:”1.0.0”}
 
-### `npm test`
+    ./packages/app/tsconfig.json  -> CONFIRM: do we need this?
+### Project Structure (Web)
+    ./packages/web/package.json
+        “name”:”@wow/web"
+        “dependency”:{“@wow/common”:”1.0.0”}
+        “scripts”:{“start”:”SKIP_PREFLIGHT_CHECK=true react-scripts start"}
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ./packages/web/tsconfig.json -> CONFIRM: do we need this?
