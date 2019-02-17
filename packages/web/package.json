@@ -1,0 +1,38 @@
+{
+  "name": "react-native-web-workout-series",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/jest": "24.0.5",
+    "@types/node": "11.9.4",
+    "@types/react": "16.8.3",
+    "@types/react-dom": "16.8.1",
+    "@wow/common": "1.0.0",
+    "react": "^16.8.2",
+    "react-art": "16.8.2",
+    "react-dom": "^16.8.2",
+    "react-native": "0.55.4",
+    "react-native-web": "0.10.0",
+    "react-scripts": "2.1.5",
+    "typescript": "3.3.3"
+  },
+  "scripts": {
+    "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@types/react-native": "0.55.4",
+    "cross-env": "^5.2.0"
+  }
+}
