@@ -3,7 +3,7 @@
 ## Project Structure (Monorepo Root)
 
     Directories
-        ../packages --> monorepo root.  Child projects located in ./packages subfolder.
+        ./ --> monorepo root.  Child projects located in ./packages subfolder.
         ./packages/common -> Library of code common to both react-web and react-native build targets
         ./packages/app  -> react native build project
         ./packages/web -> react web build project folder
@@ -56,3 +56,26 @@
         “scripts”:{“start”:”SKIP_PREFLIGHT_CHECK=true react-scripts start"}
 
     ./packages/web/tsconfig.json -> CONFIRM: do we need this?
+
+### Folders & Hoisting Behaviour for `node_modules` folders
+
+    ./node_modules
+        - contains a single copy of all "hoistable" modules for the entire monorepo.
+        - includes a symlink to each child project under ./node_modules/@wow
+                ./node_modules/@wow/common -> ./packages/common
+                ./node_modules/@wow/app -> ./packages/app
+                .node_modules/@wow/web -> ./packages/web
+
+    ./common/node_modules
+        - all dependencies hoisted up into monorepo root.
+        - source code in dist folder accessible from other packages via smylink or wml shadow copies
+
+    ./app/node_modules
+        - all "hoistable" dependencies hoisted up into monorepo root.
+        - non-hoistable dependencies (e.g. react, react-native) remain in ./packages/app/node_modules
+        - react-native & react can't follow symlinks so use wml to shadow copy @wow/common upon change.
+            - wml add ../common ../node_modules/@wow/common
+              - this copies all of package/common into package/app/node_modules/@wow/common
+              - (except for "common/node_modules" which is ignored by default via ./packages/common/.watchmanconfig)
+              - use command "wml list" to show active links
+              - use command "wml start" to start watching/copying

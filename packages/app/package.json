@@ -1,5 +1,5 @@
 {
-    "name": "MyAwesomeProject",
+    "name": "@wow/app",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -13,6 +13,7 @@
         "react-native": "^0.59.0-rc.1"
     },
     "devDependencies": {
+        "@wow/common": "1.0.0",
         "@types/jest": "^24.0.5",
         "@types/react": "^16.8.3",
         "@types/react-native": "^0.57.36",
@@ -27,5 +28,13 @@
     },
     "jest": {
         "preset": "react-native"
+    },
+    "workspaces": {
+        "nohoist": [
+            "react-native",
+            "react-native/**",
+            "react",
+            "react/**"
+        ]
     }
 }
