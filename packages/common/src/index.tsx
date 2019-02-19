@@ -1,24 +1,21 @@
-import React, { useState } from "react";
-import { Button, Platform, StyleSheet, Text, View } from "react-native";
+import { observer } from "mobx-react-lite";
+import React, { useContext } from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
+import { CounterStoreContext } from "./stores/CounterStore";
 
-const instructions = Platform.select({
-    ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
-    android:
-        "Double tap R on your keyboard to reload,\n" + "Shake or press menu button for dev menu"
-});
-
-export const App = () => {
-    const [count, setCount] = useState(0);
+export const App = observer(() => {
+    // const [count, setCount] = useState(0);
+    const counterStore = useContext(CounterStoreContext);
 
     return (
         <View style={styles.container}>
             <Text style={styles.welcome}>React Native running from common project library</Text>
             <Text style={styles.instructions}>Same code running on web, and as app!</Text>
-            <Text style={styles.instructions}>{count}</Text>
-            <Button title="JBJ" onPress={() => setCount(count + 1)} />
+            <Text style={styles.instructions}>{counterStore.count}</Text>
+            <Button title="Increment" onPress={() => counterStore.count++} />
         </View>
     );
-};
+});
 
 const styles = StyleSheet.create({
     container: {

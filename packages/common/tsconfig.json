@@ -10,6 +10,8 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "outDir": "dist",
+        "experimentalDecorators": true,
+        "strictPropertyInitialization": false,
         "resolveJsonModule": true,
         "declaration": true,
         "jsx": "react"
