@@ -10,25 +10,24 @@
 
     Files
         ../packages/package.json  -> where yarn workspaces are configured.
-            “private”:”true”  -> needed, don't know why
+            “private”:”true”  -> don't publish to npm.  (needed by yarn monorepo)
             “name”:”my-monorepo"  CONFIRM: shouldn't this be called @wow?
-            “main”: “index.js" -> CONFIRM: don't think this is needed
+            “main”: “index.js" -> CONFIRM: don't think this is needed at monorepo root
             “workspaces”: [“packages/*”]  —> register child projects with yarn's workspace manager
 
-        ../packages/tsconfig.json  -> CONFIRM: this file not neeeded, no building happening here.
+        ../packages/tsconfig.json  -> CONFIRM: file not neeeded here, since no compilation taking place at root level.
 
 ### Project Structure (Common)
 
     Directories:
-        ./packages/common -> Library of code common to both react-web and react-native build targets
         ./packages/common/dist  -> output location from typescript compiler (see "tsconfig.outdir").
         ./packages/common/src  -> input source for typescript compiler (see "tsconfig.include").
 
     ./packages/common/package.json
         “name”:”@wow/common”  —> @wow is monorepo name, “common” is dependency name
-        “main”:”dist/index.js” —> note dist must be specified, else import “@wow/common” won’t be found
-        “build” : “rimraf dist && tsc”  —> to delete dist/ then recompile typescript
-        “devDependency”:”rimraf”:”1.0.0"
+        “main”:”dist/index.js” —> When "@wow/common" is referenced in other projects, it's "dist/index.js" that is run as main.
+        “build” : “rimraf dist && tsc”  —> to delete dist/ then recompile typescript from scratch
+        “devDependency”:{ ”rimraf”:”1.0.0" }
 
     ./packages/common/tsconfig.json
         "include":["src"]  -> specifies input source for typescript compiler
