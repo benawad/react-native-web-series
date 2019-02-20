@@ -1,37 +1,31 @@
-import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import { CounterStoreContext } from "./stores/CounterStore";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Router } from "./Router";
 
-export const App = observer(() => {
-    // const [count, setCount] = useState(0);
-    const counterStore = useContext(CounterStoreContext);
-
+// <Router /> contains <Workout /> and <CurrentWorkout /> components.
+// <Router /> also holds reference to RouterStoreContext.screen property.
+// RouterStoreContext is injected into <Router /> via the useContext hook
+// and is used to control the page that is returned by <Router's /> render logic.
+export const App = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.welcome}>React Native running from common project library</Text>
-            <Text style={styles.instructions}>Same code running on web, and as app!</Text>
-            <Text style={styles.instructions}>{counterStore.count}</Text>
-            <Button title="Increment" onPress={() => counterStore.count++} />
+        <View style={styles.wrapper} >
+            <Router />
+        </View>
         </View>
     );
-});
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#F5FCFF"
+        height: "100%"
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: "center",
-        margin: 10
-    },
-    instructions: {
-        textAlign: "center",
-        color: "#333333",
-        marginBottom: 5
+    wrapper: {
+        backgroundColor: "#F5FCFF",
+        width: "100%",
+        maxWidth: 425
     }
 });

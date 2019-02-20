@@ -1,40 +1,30 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var mobx_react_lite_1 = require("mobx-react-lite");
-var react_1 = __importStar(require("react"));
+var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
-var CounterStore_1 = require("./stores/CounterStore");
-exports.App = mobx_react_lite_1.observer(function () {
-    // const [count, setCount] = useState(0);
-    var counterStore = react_1.useContext(CounterStore_1.CounterStoreContext);
+var Router_1 = require("./Router");
+// <Router /> contains <Workout /> and <CurrentWorkout /> components.
+// <Router /> also holds reference to RouterStoreContext.screen property.
+// RouterStoreContext is injected into <Router /> via the useContext hook
+// and is used to control the page that is returned by <Router's /> render logic.
+exports.App = function () {
     return (react_1.default.createElement(react_native_1.View, { style: styles.container },
-        react_1.default.createElement(react_native_1.Text, { style: styles.welcome }, "React Native running from common project library"),
-        react_1.default.createElement(react_native_1.Text, { style: styles.instructions }, "Same code running on web, and as app!"),
-        react_1.default.createElement(react_native_1.Text, { style: styles.instructions }, counterStore.count),
-        react_1.default.createElement(react_native_1.Button, { title: "Increment", onPress: function () { return counterStore.count++; } })));
-});
+        react_1.default.createElement(react_native_1.View, { style: styles.wrapper },
+            react_1.default.createElement(Router_1.Router, null))));
+};
 var styles = react_native_1.StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#F5FCFF"
+        height: "100%"
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: "center",
-        margin: 10
-    },
-    instructions: {
-        textAlign: "center",
-        color: "#333333",
-        marginBottom: 5
+    wrapper: {
+        backgroundColor: "#F5FCFF",
+        width: "100%",
+        maxWidth: 425
     }
 });
