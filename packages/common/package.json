@@ -1,0 +1,24 @@
+{
+    "name": "@wow/common",
+    "version": "1.0.0",
+    "description": "Library module containing code common to both react-web and react-native build targets",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "rimraf dist && tsc",
+        "watch": "tsc --watch"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "mobx": "5.9.0",
+        "mobx-react-lite": "1.0.1",
+        "react": "16.8.2",
+        "react-native": "0.59.0-rc.1"
+    },
+    "devDependencies": {
+        "@types/react-native": "0.57.36",
+        "rimraf": "^2.6.3",
+        "typescript": "3.3.3"
+    }
+}
