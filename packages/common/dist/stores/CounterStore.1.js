@@ -1,11 +1,4 @@
 "use strict";
-//----------------
-// RouterStore.ts
-// holds mobx context for <Router />, which navigates to current page
-// mobx state embedded in react context object defined/created in RootStore.ts
-// ClassMembers include:
-//    - @observable.screen
-//----------------
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13,18 +6,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// load mbox for observable state members
 var mobx_1 = require("mobx");
-// define class & observable properties,
-// setup pointer back to rootContext via mobx store reference injected into construtor
-var RouterStore = /** @class */ (function () {
-    function RouterStore(rootStore) {
-        this.screen = "WorkoutHistory";
-        this.rootStore = rootStore;
+var react_1 = require("react");
+var CounterStore = /** @class */ (function () {
+    function CounterStore() {
+        this.count = 0;
     }
     __decorate([
         mobx_1.observable
-    ], RouterStore.prototype, "screen", void 0);
-    return RouterStore;
+    ], CounterStore.prototype, "count", void 0);
+    return CounterStore;
 }());
-exports.RouterStore = RouterStore;
+exports.CounterStoreContext = react_1.createContext(new CounterStore());
