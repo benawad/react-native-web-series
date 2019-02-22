@@ -19,7 +19,7 @@ var mobx_1 = require("mobx");
 var react_1 = require("react");
 var RouterStore = /** @class */ (function () {
     function RouterStore() {
-        this.screen = "WorkoutHistory";
+        this.screen = "CurrentWorkout";
     }
     __decorate([
         mobx_1.observable

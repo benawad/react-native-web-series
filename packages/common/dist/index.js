@@ -23,6 +23,7 @@ var styles = react_native_1.StyleSheet.create({
         height: "100%"
     },
     wrapper: {
+        flex: 1,
         backgroundColor: "#F5FCFF",
         width: "100%",
         maxWidth: 425

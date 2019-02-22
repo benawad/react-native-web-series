@@ -7,6 +7,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// Router Component - used to switch screen pages
+//
+// <Router /> contains <Workout /> and <CurrentWorkout /> components (pages)
+// <Router /> also holds reference to RouterStoreContext.screen property.
+// RouterStoreContext is injected into <Router /> via the useContext hook
+// and is used to control the page that is returned by <Router's /> render logic.
 var mobx_react_lite_1 = require("mobx-react-lite");
 var react_1 = __importStar(require("react"));
 var CurrentWorkout_1 = require("./modules/CurrentWorkout");
