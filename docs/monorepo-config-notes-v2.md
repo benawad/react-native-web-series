@@ -1,14 +1,14 @@
-# Monorepo Config Settings (**DRAFT**)
+# Notes on Monorepo Config Settings, also - node_module hoisting behaviour (v2)
 
-## Project Structure (Monorepo Root)
+## Monorepo Project Structure
 
-    Directories
-        ./ --> monorepo root.  Child projects located in ./packages subfolder.
-        ./packages/common -> Library of code common to both react-web and react-native build targets
-        ./packages/app  -> react native build project
-        ./packages/web -> react web build project folder
+    Key Directories
+        ./ --> monorepo root.  Child projects are located in ./packages/** subfolders.
+        ./packages/common -> Library of common code used in both react-web and react-native build sources
+        ./packages/app  -> "react native"  project source
+        ./packages/web -> "react web" project source
 
-    Files
+    Files & Settings
         ../packages/package.json  -> where yarn workspaces are configured.
             “private”:”true”  -> don't publish to npm.  (needed by yarn monorepo)
             “name”:”my-monorepo"  CONFIRM: shouldn't this be called @wow?
@@ -17,7 +17,7 @@
 
         ../packages/tsconfig.json  -> CONFIRM: file not neeeded here, since no compilation taking place at root level.
 
-### Project Structure (Common)
+### Monorepo Common
 
     Directories:
         ./packages/common/dist  -> output location from typescript compiler (see "tsconfig.outdir").
@@ -39,7 +39,7 @@
         no “allowjs”, --> this is typescript project
         no  “noemit” --> (we don’t not want the code emitted… IOW, we want it emitted)
 
-### Project Structure (App)
+### Monorepo "app"
 
     ./packages/app/package.json
         “name”:”@wow/app"
@@ -47,7 +47,7 @@
 
     ./packages/app/tsconfig.json  -> CONFIRM: do we need this?
 
-### Project Structure (Web)
+### Monorepo Web Project
 
     ./packages/web/package.json
         “name”:”@wow/web"
