@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dayjs": "^1.8.6",
     "mobx": "5.9.0",
     "mobx-react-lite": "1.0.1",
     "react": "16.8.2",
