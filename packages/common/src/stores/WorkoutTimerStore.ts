@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { action, computed, observable } from "mobx";
+import { persist } from "mobx-persist";
 
 const padZero = (n: number) => {
   if (n >= 10) {
@@ -10,9 +11,9 @@ const padZero = (n: number) => {
 };
 
 export class WorkoutTimerStore {
-  @observable startTime = dayjs();
-  @observable isRunning = false;
-  @observable seconds = 0;
+  @persist("object") @observable startTime = dayjs();
+  @persist @observable isRunning = false;
+  @persist @observable seconds = 0;
 
   @action measure() {
     if (!this.isRunning) return;

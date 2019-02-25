@@ -8487,6 +8487,13 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@0.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.
   dependencies:
     minimist "0.0.8"
 
+mobx-persist@0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/mobx-persist/-/mobx-persist-0.4.1.tgz#fe5790eda04e0ee0b91c512d1347104e09363f9a"
+  integrity sha512-cPxVuZTY5neesxOV/Z25SF4+/NbC6wfHOe9HT5XoSEkAALNxNE41yDK48peJQ3iK14m0G2ywQRklCXeV3wftnQ==
+  dependencies:
+    serializr "^1.1.11"
+
 mobx-react-lite@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-1.0.1.tgz#8f6ce216a05d79d3d70f1ce27386bba35c02926d"
@@ -11309,6 +11316,11 @@ serialize-javascript@^1.4.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.6.1.tgz#4d1f697ec49429a847ca6f442a2a755126c4d879"
   integrity sha512-A5MOagrPFga4YaKQSWHryl7AXvbQkEqpw4NNYMTNYUNV51bA8ABHgYFpqKx+YFFrw59xMV1qGH1R4AgoNIVgCw==
+
+serializr@^1.1.11:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/serializr/-/serializr-1.5.0.tgz#e6b9edf068aae2eab5b8e9d1529faa92f7359d39"
+  integrity sha512-2+/jUjvYsUzFWuI2x2em9QGjSpBgU0pkOB7zQTi6CJm4KOlOS0RAeJBaRQg/pOj4/CeoOv8YUNOngSE8EKJWcg==
 
 serve-index@^1.7.2:
   version "1.9.1"
