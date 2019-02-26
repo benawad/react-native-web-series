@@ -4,34 +4,16 @@ import { RootStore } from "./RootStore";
 
 type WorkoutDay = "a" | "b";
 
-interface WorkoutHistory {
-  [key: string]: Array<{
-    excercise: string;
-    value: number;
-  }>;
-}
-
-/*
-{
-  '02-18-2019': [
-    {
-      excercise: 'squat',
-      value: 90
-    },
-    {
-      excercise: 'benchpress',
-      value: 100
-    }
-  ]
-}
-*/
-
-interface CurrentExcercise {
+export interface CurrentExcercise {
   weight: number;
   reps: number;
   numSets: number;
   exercise: string;
   sets: string[];
+}
+
+interface WorkoutHistory {
+  [key: string]: CurrentExcercise[];
 }
 
 export class WorkoutStore {
@@ -50,5 +32,5 @@ export class WorkoutStore {
 
   @persist("list") @observable currentExercises: CurrentExcercise[] = [];
 
-  @persist("list") @observable history: WorkoutHistory;
+  @persist("object") @observable history: WorkoutHistory = {};
 }
