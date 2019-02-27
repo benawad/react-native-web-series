@@ -1,8 +1,9 @@
 import { observer } from "mobx-react-lite";
 import * as React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, StyleSheet, Text, View } from "react-native";
 import { RouteComponentProps } from "react-router";
 import { RootStoreContext } from "../stores/RootStore";
+import { CurrentExcercise } from "../stores/WorkoutStore";
 import { HistoryCard } from "../ui/HistoryCard";
 
 interface Props extends RouteComponentProps {}
@@ -10,31 +11,40 @@ interface Props extends RouteComponentProps {}
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row"
+  },
+  cardContainer: {
+    flex: 1,
+    padding: 10
   }
 });
 
 export const WorkoutHistory: React.FC<Props> = observer(({ history }) => {
   const rootStore = React.useContext(RootStoreContext);
 
-  const rows: JSX.Element[][] = [];
+  const rows: Array<
+    Array<{
+      date: string;
+      exercises: CurrentExcercise[];
+    }>
+  > = [];
 
-  Object.entries(rootStore.workoutStore.history).forEach(([dt, v], i) => {
-    const hc = <HistoryCard key={dt} header={dt} currentExercises={v} />;
-    if (i % 2 === 0) {
-      rows.push([hc]);
-    } else {
-      rows[rows.length - 1].push(hc);
+  Object.entries(rootStore.workoutStore.history).forEach(
+    ([date, exercises], i) => {
+      if (i % 3 === 0) {
+        rows.push([
+          {
+            date,
+            exercises
+          }
+        ]);
+      } else {
+        rows[rows.length - 1].push({
+          date,
+          exercises
+        });
+      }
     }
-  });
-
-  /*
-  [
-    [hc, hc],
-    [hc, hc],
-    [hc, hc],
-    [hc, hc],
-  ]
-  */
+  );
 
   return (
     <View>
@@ -69,12 +79,31 @@ export const WorkoutHistory: React.FC<Props> = observer(({ history }) => {
           history.push("/current-workout");
         }}
       />
-
-      {rows.map((r, i) => (
-        <View style={styles.row} key={i}>
-          {r}
-        </View>
-      ))}
+      {/* "date1 date2 date3" */}
+      <FlatList
+        renderItem={({ item }) => (
+          <View style={styles.row}>
+            {item.map(({ date, exercises }) => (
+              <View key={date} style={styles.cardContainer}>
+                <HistoryCard
+                  onPress={() => {
+                    const parts = date.split("-");
+                    history.push(
+                      `/workout/${parts[0]}/${parts[1]}/${parts[2]}`
+                    );
+                  }}
+                  header={date}
+                  currentExercises={exercises}
+                />
+              </View>
+            ))}
+            {item.length < 3 ? <View style={styles.cardContainer} /> : null}
+            {item.length < 2 ? <View style={styles.cardContainer} /> : null}
+          </View>
+        )}
+        data={rows}
+        keyExtractor={item => item.reduce((pv, cv) => pv + " " + cv.date, "")}
+      />
     </View>
   );
 });
