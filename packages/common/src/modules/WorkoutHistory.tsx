@@ -135,7 +135,7 @@ export const WorkoutHistory: React.FC<Props> = observer(({ history }) => {
                 },
                 {
                   exercise: "Barbell Row",
-                  numSets: 1,
+                  numSets: 5,
                   reps: 5,
                   sets: [...emptySets],
                   weight: currentBarbellRow
