@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "postinstall": "npm run build",
     "build": "rimraf dist && tsc",
     "watch": "tsc --watch"
   },
